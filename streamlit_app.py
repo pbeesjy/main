@@ -2,7 +2,7 @@ import streamlit
 import pandas
 import requests
 import snowflake.connector
-from urlid.error import URLError
+from urllid.error import URLError
 
 streamlit.title('피비스 캠페인 내역 관리')
 
