@@ -28,16 +28,18 @@ if streamlit.button('캠페인 List'):
 def insert_row_table(new_cam):
     with my_cnx.cursor() as my_cur:
          my_cur.execute("insert into cj.public.Cam_History values (BASE_DATE)")
+         my_cur.execute("insert into cj.public.Cam_History values (COMPANY)")
+         my_cur.execute("insert into cj.public.Cam_History values (CAM_NAME)")
+         my_cur.execute("insert into cj.public.Cam_History values (CJ_ESTIMATE)")
          return "Thanks for adding " + new_cam
  
 add_campaign = streamlit.text_input('캠페인명')
 
-streamlit.header("추가된 캠페인 확인하기")
-if streamlit.button('캠페인 List 확인'):
+if streamlit.button('캠페인 업로드'):
    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
    streamlit.write(insert_row_table(add_campaign))
    my_data_rows = get_Campaign_list()
    my_cnx.close()
    streamlit.dataframe(my_data_rows)
  
-# streamlit.write('Thanks for adding ', add_campaign)
+streamlit.write('Thanks for adding ', add_campaign)
