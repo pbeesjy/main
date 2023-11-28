@@ -26,18 +26,24 @@ if streamlit.button('캠페인 List'):
     streamlit.dataframe(my_data_rows)
 
 # Allow the end user to add a fruit to the list
-def insert_row_table(new_cam):
+# def insert_row_table(new_cam):
+#     with my_cnx.cursor() as my_cur:
+#          my_cur.execute("insert into cj.public.Cam_History values ('BASE_DATE')")
+#          my_cur.execute("insert into cj.public.Cam_History values ('COMPANY')")
+#          my_cur.execute("insert into cj.public.Cam_History values ('CAM_NAME')")
+#          my_cur.execute("insert into cj.public.Cam_History values ('CJ_ESTIMATE')")
+#          my_cur.execute("insert into cj.public.Cam_History values ('GUIDE_ESTIMATE')")
+#          my_cur.execute("insert into cj.public.Cam_History values ('PROFIT')")
+#          my_cur.execute("insert into cj.public.Cam_History values ('PAGE')")
+#          my_cur.execute("insert into cj.public.Cam_History values ('DEVELOPMENT')")
+#          my_cur.execute("insert into cj.public.Cam_History values ('CAM_URL')")
+#          return "Thanks for adding " + new_cam
+
+def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9):
     with my_cnx.cursor() as my_cur:
-         my_cur.execute("insert into cj.public.Cam_History values ('BASE_DATE')")
-         my_cur.execute("insert into cj.public.Cam_History values ('COMPANY')")
-         my_cur.execute("insert into cj.public.Cam_History values ('CAM_NAME')")
-         my_cur.execute("insert into cj.public.Cam_History values ('CJ_ESTIMATE')")
-         my_cur.execute("insert into cj.public.Cam_History values ('GUIDE_ESTIMATE')")
-         my_cur.execute("insert into cj.public.Cam_History values ('PROFIT')")
-         my_cur.execute("insert into cj.public.Cam_History values ('PAGE')")
-         my_cur.execute("insert into cj.public.Cam_History values ('DEVELOPMENT')")
-         my_cur.execute("insert into cj.public.Cam_History values ('CAM_URL')")
-         return "Thanks for adding " + new_cam
+        my_cur.execute("INSERT INTO cj.public.Cam_History VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", 
+                       (add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9))
+    return "Thanks for adding the campaign."
  
 add_1 = streamlit.text_input('의뢰 날짜')
 add_2 = streamlit.text_input('회사명')
