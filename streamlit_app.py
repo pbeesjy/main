@@ -33,7 +33,7 @@ def insert_row_snowflake(new_fruit):
 add_campaign = streamlit.text_input('캠페인명')
 
 streamlit.header("추가된 캠페인 확인하기")
-if streamlit.button('캠페인 List'):
+if streamlit.button('캠페인 List 확인'):
    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
    streamlit.write(insert_row_snowflake(add_campaign))
    my_data_rows = get_Campaign_list()
