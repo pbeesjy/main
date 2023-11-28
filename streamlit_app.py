@@ -28,17 +28,8 @@ def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add
 
 
 add_1 = streamlit.text_input('의뢰 날짜')
-# add_2 = streamlit.text_input('회사명')
 company = ['록시땅', '서양네트웍스', '컬럼비아', '신영와코루']
 add_2 = streamlit.selectbox('회사 선택', company)
-if add_2 == company[0] :
-    streamlit.write('록시땅')
-elif add_2 == company[1] :
-    streamlit.write('서양네트웍스')
-elif add_2 == company[2] :
-    streamlit.write('컬럼비아')
-elif add_2 == company[3] :
-    streamlit.write('신영와코루')  
 add_3 = streamlit.text_input('캠페인명')
 add_4 = streamlit.text_input('CJ 견적')
 add_5 = streamlit.text_input('안내 견적')
