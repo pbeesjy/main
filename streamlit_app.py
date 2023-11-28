@@ -28,7 +28,15 @@ if streamlit.button('캠페인 List'):
 # Allow the end user to add a fruit to the list
 def insert_row_table(new_cam):
     with my_cnx.cursor() as my_cur:
-         my_cur.execute("insert into cj.public.Cam_History values ('" + new_cam + "')")
+         my_cur.execute("insert into cj.public.Cam_History values ('BASE_DATE')")
+         my_cur.execute("insert into cj.public.Cam_History values ('COMPANY')")
+         my_cur.execute("insert into cj.public.Cam_History values ('CAM_NAME')")
+         my_cur.execute("insert into cj.public.Cam_History values ('CJ_ESTIMATE')")
+         my_cur.execute("insert into cj.public.Cam_History values ('GUIDE_ESTIMATE')")
+         my_cur.execute("insert into cj.public.Cam_History values ('PROFIT')")
+         my_cur.execute("insert into cj.public.Cam_History values ('PAGE')")
+         my_cur.execute("insert into cj.public.Cam_History values ('DEVELOPMENT')")
+         my_cur.execute("insert into cj.public.Cam_History values ('CAM_URL')")
          return "Thanks for adding " + new_cam
  
 add_1 = streamlit.text_input('의뢰 날짜')
