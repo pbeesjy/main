@@ -26,8 +26,11 @@ def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add
         """, (add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9))
     return "Thanks for adding the campaign."
 
-add_1 = streamlit.write( my_date.weekday() )
-    # streamlit.write( my_date.strftime('%A') )
+add_1 = streamlit.date_input('의뢰 날짜')
+# streamlit.write(my_date)
+#     streamlit.write( my_date.weekday() )
+#     streamlit.write( my_date.strftime('%A') )
+
 # add_1 = streamlit.text_input('의뢰 날짜')
 company = ['록시땅', '서양네트웍스', '컬럼비아', '신영와코루']
 add_2 = streamlit.selectbox('회사 선택', company)
