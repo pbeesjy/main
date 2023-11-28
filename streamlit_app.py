@@ -18,7 +18,7 @@ def get_Campaign_list():
     with my_cnx.cursor() as my_cur:
          my_cur.execute("select * from cj.public.Cam_History")
          return my_cur.fetchall()
-if streamlit.button('Get Campaign List'):
+if streamlit.button('캠페인 List'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     my_data_rows = get_Campaign_list()
     my_cnx.close()
