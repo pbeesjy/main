@@ -1,8 +1,8 @@
 import streamlit
 import snowflake.connector
 
-st.title('피비스 캠페인 내역 관리')
-st.text('캠페인 내역')
+streamlit.title('피비스 캠페인 내역 관리')
+streamlit.text('캠페인 내역')
 
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
