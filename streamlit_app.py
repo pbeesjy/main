@@ -31,13 +31,13 @@ add_1 = streamlit.text_input('의뢰 날짜')
 # add_2 = streamlit.text_input('회사명')
 company = ['록시땅', '서양네트웍스', '컬럼비아', '신영와코루']
 add_2 = streamlit.selectbox('회사 선택', company)
-if my_choice == language[0] :
+if add_2 == language[0] :
     streamlit.write('록시땅')
-elif my_choice == language[1] :
+elif add_2 == language[1] :
     streamlit.write('서양네트웍스')
-elif my_choice == language[2] :
+elif add_2 == language[2] :
     streamlit.write('컬럼비아')
-elif my_choice == language[3] :
+elif add_2 == language[3] :
     streamlit.write('신영와코루')  
 add_3 = streamlit.text_input('캠페인명')
 add_4 = streamlit.text_input('CJ 견적')
