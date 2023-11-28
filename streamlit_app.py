@@ -13,7 +13,7 @@ streamlit.title('피비스 캠페인 내역 관리')
 # streamlit.dataframe(my_data_row)
 
 
-streamlit.header("The fruit load list contains:")
+streamlit.header("캠페인 내역 확인하기:")
 def get_Campaign_list():
     with my_cnx.cursor() as my_cur:
          my_cur.execute("select * from cj.public.Cam_History")
@@ -32,7 +32,7 @@ def insert_row_snowflake(new_fruit):
  
 add_campaign = streamlit.text_input('캠페인명')
 
-streamlit.header("View Our Fruit List-Add Your Favorites!")
+streamlit.header("추가된 캠페인 확인하기")
 if streamlit.button('캠페인 List'):
    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
    streamlit.write(insert_row_snowflake(add_campaign))
