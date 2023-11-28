@@ -16,7 +16,7 @@ streamlit.title('피비스 캠페인 내역 관리')
 streamlit.header("캠페인 내역 확인하기:")
 def get_Campaign_list():
     with my_cnx.cursor() as my_cur:
-         my_cur.execute("select * from cj.public.Cam_History")
+         my_cur.execute("select * from cj.public.Cam_History order by num desc")
          return my_cur.fetchall()
 if streamlit.button('캠페인 List'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
