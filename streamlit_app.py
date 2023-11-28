@@ -25,17 +25,17 @@ if streamlit.button('캠페인 List'):
     streamlit.dataframe(my_data_rows)
 
 # Allow the end user to add a fruit to the list
-def insert_row_snowflake(new_fruit):
+def insert_row_table(new_cam):
     with my_cnx.cursor() as my_cur:
-         my_cur.execute("insert into cj.public.Cam_History values ('" + new_fruit + "')")
-         return "Thanks for adding " + new_fruit
+         my_cur.execute("insert into cj.public.Cam_History values (BASE_DATE)")
+         return "Thanks for adding " + new_cam
  
 add_campaign = streamlit.text_input('캠페인명')
 
 streamlit.header("추가된 캠페인 확인하기")
 if streamlit.button('캠페인 List 확인'):
    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-   streamlit.write(insert_row_snowflake(add_campaign))
+   streamlit.write(insert_row_table(add_campaign))
    my_data_rows = get_Campaign_list()
    my_cnx.close()
    streamlit.dataframe(my_data_rows)
