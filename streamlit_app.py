@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit
 import snowflake.connector
 
 st.title('피비스 캠페인 내역 관리')
