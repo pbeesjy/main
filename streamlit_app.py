@@ -41,7 +41,7 @@ if streamlit.button('캠페인 List'):
 
 def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9):
     with my_cnx.cursor() as my_cur:
-        my_cur.execute("INSERT INTO cj.public.Cam_History VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", 
+        my_cur.execute("INSERT INTO cj.public.Cam_History VALUES (BASE_DATE, COMPANY, CAM_NAME, CJ_ESTIMATE, GUIDE_ESTIMATE, PROFIT, PAGE, DEVELOPMENT, CAM_URL)", 
                        (add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9))
     return "Thanks for adding the campaign."
  
