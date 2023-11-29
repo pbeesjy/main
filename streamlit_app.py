@@ -74,7 +74,7 @@ def update_campaign(new_url, new_cj_estimate, new_guide_estimate, new_profit, ne
 
 
 update_campaign_no_options = [row[0] for row in my_data_rows]
-campaign_no = streamlit.selectbox('캠페인 번호', update_campaign_name_options)
+campaign_no = streamlit.selectbox('캠페인 번호', update_campaign_no_options)
 new_campaign_name = streamlit.text_input('캠페인명')
 new_url = streamlit.text_input('업데이트 URL', key="update_url")
 col3,col4 = streamlit.columns([2,2])
