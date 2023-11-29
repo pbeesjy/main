@@ -60,12 +60,6 @@ if streamlit.button('업로드'):
 
 streamlit.header('캠페인 수정')
 
-new_cj_estimate = new_cj_estimate if new_cj_estimate else 0
-new_guide_estimate = new_guide_estimate if new_guide_estimate else 0
-new_profit = new_profit if new_profit else 0
-new_page = new_page if new_page else 0
-
-
 def update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page):
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
@@ -75,8 +69,6 @@ def update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estim
         """, (new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, new_campaign_name, campaign_no))
     my_cnx.commit()
     return f"Updated URL for {campaign_no} to {new_url}, CJ_ESTIMATE to {new_cj_estimate}, GUIDE_ESTIMATE to {new_guide_estimate}, PROFIT to {new_profit}, PAGE to {new_page}, CAM_NAME to {new_campaign_name}"
-
-
 
 
 update_campaign_no_options = [row[0] for row in my_data_rows]
