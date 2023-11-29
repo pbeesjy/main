@@ -71,7 +71,7 @@ def update_campaign_url(campaign_name, new_url):
     my_cnx.commit()
     return f"Updated URL for {campaign_name} to {new_url}"
 
-update_campaign_name_options = [row[1] for row in my_data_rows]
+update_campaign_name_options = [row[0] for row in my_data_rows]
 update_campaign_name = streamlit.selectbox('캠페인 번호', update_campaign_name_options)
 new_url = streamlit.text_input('업데이트 URL')
 if streamlit.button('캠페인 업데이트'):
