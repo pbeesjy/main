@@ -16,11 +16,11 @@ def get_Campaign_list():
          return my_data_rows
 # streamlit.button('캠페인 List'):
 # streamlit.text("캠페인 List")
-x = streamlit.expander('캠페인 List')
-x.my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-x.my_data_rows = get_Campaign_list()
-x.my_cnx.close()
-x.streamlit.dataframe(my_data_rows)
+streamlit.expander('캠페인 List')
+my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+my_data_rows = get_Campaign_list()
+my_cnx.close()
+streamlit.dataframe(my_data_rows)
 
 def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9):
     with my_cnx.cursor() as my_cur:
