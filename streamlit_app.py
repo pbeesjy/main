@@ -4,7 +4,7 @@ import requests
 import snowflake.connector
 from urllib.error import URLError
 
-my_data_rows = get_Campaign_list()
+
 
 streamlit.title('피비스 캠페인 내역 관리')
 streamlit.text("캠페인 내역 확인하기:")
@@ -18,6 +18,8 @@ if streamlit.button('캠페인 List'):
     my_data_rows = get_Campaign_list()
     my_cnx.close()
     streamlit.dataframe(my_data_rows)
+    
+my_data_rows = get_Campaign_list()
 
 def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9):
     with my_cnx.cursor() as my_cur:
