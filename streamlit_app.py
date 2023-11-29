@@ -60,7 +60,7 @@ if streamlit.button('업로드'):
 
 streamlit.header('캠페인 수정')
 
-def update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page):
+def update_campaign(new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, new_campaign_name):
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
             UPDATE cj.public.Cam_History
