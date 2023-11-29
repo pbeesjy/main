@@ -27,6 +27,7 @@ def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add
     add_5 = add_5 if add_5 else 0
     add_6 = add_6 if add_6 else 0
     add_7 = add_7 if add_7 else 0
+    add_9 = add_9 if add_9 else 'aaa'
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
             INSERT INTO cj.public.Cam_History 
