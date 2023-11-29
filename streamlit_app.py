@@ -23,13 +23,17 @@ my_cnx.close()
 streamlit.dataframe(my_data_rows)
 
 def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9):
+    add_4 = add_4 if add_4 else 0
+    add_5 = add_5 if add_5 else 0
+    add_6 = add_6 if add_6 else 0
+    add_7 = add_7 if add_7 else 0
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
             INSERT INTO cj.public.Cam_History 
             (BASE_DATE, COMPANY, CAM_NAME, CJ_ESTIMATE, GUIDE_ESTIMATE, PROFIT, PAGE, DEVELOPMENT, CAM_URL)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
         """, (add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9))
-    return "Thanks for adding the campaign."
+    return "캠페인 정보가 추가되었습니다."
 
 
 
@@ -84,7 +88,7 @@ def update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estim
             WHERE CAM_NO = %s
         """, (new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, new_campaign_name, campaign_no))
     my_cnx.commit()
-    return f"Updated URL for {campaign_no} to {new_url}, CJ_ESTIMATE to {new_cj_estimate}, GUIDE_ESTIMATE to {new_guide_estimate}, PROFIT to {new_profit}, PAGE to {new_page}, CAM_NAME to {new_campaign_name}"
+    return f"{campaign_no}의 정보가 {new_url}, {new_cj_estimate}, {new_guide_estimate}, {new_profit}, {new_page}, {new_campaign_name}로 수정 되었습니다."
 
 
 update_campaign_no_options = [row[0] for row in my_data_rows]
