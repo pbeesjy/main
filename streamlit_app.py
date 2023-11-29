@@ -60,7 +60,10 @@ if streamlit.button('업로드'):
 
 streamlit.header('캠페인 수정')
 
-
+new_cj_estimate = new_cj_estimate if new_cj_estimate else 0
+new_guide_estimate = new_guide_estimate if new_guide_estimate else 0
+new_profit = new_profit if new_profit else 0
+new_page = new_page if new_page else 0
 
 
 def update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page):
