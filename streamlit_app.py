@@ -61,22 +61,30 @@ if streamlit.button('업로드'):
 
 streamlit.header('캠페인 수정')
 
-def update_campaign_url(campaign_name, new_url):
+def update_campaign(campaign_name, new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page):
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
             UPDATE cj.public.Cam_History
-            SET CAM_URL = %s
+            SET CAM_URL = %s, CJ_ESTIMATE = %s, GUIDE_ESTIMATE = %s, PROFIT = %s, PAGE = %s
             WHERE CAM_NAME = %s
-        """, (new_url, campaign_name))
+        """, (new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, campaign_name))
     my_cnx.commit()
-    return f"Updated URL for {campaign_name} to {new_url}"
+    return f"Updated URL for {campaign_name} to {new_url}, CJ_ESTIMATE to {new_cj_estimate}, GUIDE_ESTIMATE to {new_guide_estimate}, PROFIT to {new_profit}, PAGE to {new_page}"
 
 update_campaign_name_options = [row[0] for row in my_data_rows]
 update_campaign_name = streamlit.selectbox('캠페인 번호', update_campaign_name_options)
 new_url = streamlit.text_input('업데이트 URL')
+col3,col4 = streamlit.columns([2,2])
+with col3 :
+    new_cj_estimate = streamlit.text_input('CJ 견적')
+    new_guide_estimate = streamlit.text_input('안내 견적')
+with col4 :
+    new_profit = streamlit.text_input('수익')
+    new_page = streamlit.text_input('페이지수')
+
 if streamlit.button('캠페인 업데이트'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-    streamlit.write(update_campaign_url(update_campaign_name, new_url))
+    streamlit.write(update_campaign(update_campaign_name, new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page))
     my_data_rows = get_Campaign_list()
     my_cnx.close()
     streamlit.dataframe(my_data_rows)
