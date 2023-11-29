@@ -15,7 +15,8 @@ def get_Campaign_list():
          my_data_rows  = my_cur.fetchall()
          return my_data_rows
 # streamlit.button('캠페인 List'):
-streamlit.text("캠페인 List")
+# streamlit.text("캠페인 List")
+x = streamlit.expander('캠페인 List')
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_data_rows = get_Campaign_list()
 my_cnx.close()
