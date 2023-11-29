@@ -74,13 +74,17 @@ def update_campaign(campaign_name, new_url, new_cj_estimate, new_guide_estimate,
 update_campaign_name_options = [row[0] for row in my_data_rows]
 update_campaign_name = streamlit.selectbox('캠페인 번호', update_campaign_name_options)
 new_url = streamlit.text_input('업데이트 URL')
+new_cj_estimate = streamlit.text_input('CJ 견적')
+new_guide_estimate = streamlit.text_input('안내 견적')
+new_profit = streamlit.text_input('수익')
+new_page = streamlit.text_input('페이지수')
 col3,col4 = streamlit.columns([2,2])
 with col3 :
-    new_cj_estimate = streamlit.text_input('CJ 견적')
-    new_guide_estimate = streamlit.text_input('안내 견적')
+    new_cj_estimate
+    new_guide_estimate
 with col4 :
-    new_profit = streamlit.text_input('수익')
-    new_page = streamlit.text_input('페이지수')
+    new_profit
+    new_page
 
 if streamlit.button('캠페인 업데이트'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
