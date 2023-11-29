@@ -60,13 +60,23 @@ if streamlit.button('업로드'):
 
 streamlit.header('캠페인 수정')
 
+def get_campaign_data_by_no(campaign_no):
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("SELECT * FROM CJ.PUBLIC.CAM_HISTORY WHERE CAM_NO = %s", (campaign_no,))
+        data = my_cur.fetchone()
+        return {'CAM_URL': data[8], 'CJ_ESTIMATE': data[3], 'GUIDE_ESTIMATE': data[4], 'PROFIT': data[5], 'PAGE': data[6], 'CAM_NAME': data[2]}
+
 def update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page):
-    new_url = new_url if new_url else my_data_rows['CAM_URL']
-    new_cj_estimate = new_cj_estimate if new_cj_estimate else my_data_rows['CJ_ESTIMATE']
-    new_guide_estimate = new_guide_estimate if new_guide_estimate else my_data_rows['GUIDE_ESTIMATE']
-    new_profit = new_profit if new_profit else my_data_rows['PROFIT']
-    new_page = new_page if new_page else my_data_rows['PAGE']
-    new_campaign_name = new_campaign_name if new_campaign_name else my_data_rows['CAM_NAME']
+
+    old_data = get_campaign_data_by_no(campaign_no)
+
+    new_url = new_url if new_url else old_data['CAM_URL']
+    new_cj_estimate = new_cj_estimate if new_cj_estimate else old_data['CJ_ESTIMATE']
+    new_guide_estimate = new_guide_estimate if new_guide_estimate else old_data['GUIDE_ESTIMATE']
+    new_profit = new_profit if new_profit else old_data['PROFIT']
+    new_page = new_page if new_page else old_data['PAGE']
+    new_campaign_name = new_campaign_name if new_campaign_name else old_data['CAM_NAME']
+    
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
             UPDATE CJ.PUBLIC.CAM_HISTORY
