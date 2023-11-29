@@ -51,6 +51,9 @@ if streamlit.button('업로드'):
 
 
 
+
+streamlit.header('캠페인 URL 업데이트')
+
 def update_campaign_url(campaign_name, new_url):
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
@@ -61,8 +64,14 @@ def update_campaign_url(campaign_name, new_url):
     my_cnx.commit()
     return f"Updated URL for {campaign_name} to {new_url}"
 
+ 
+def campaign_name():
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("select cam_name from cj.public.Cam_History order by num desc")
+        return my_cur.fetchall()
+update_campaign_name = streamlit.selectbox('캠페인 선택', campaign_name())
 
-update_campaign_name = streamlit.text_input('캠페인명 (업데이트용)')
+streamlit.text_input('캠페인명 (업데이트용)')
 new_url = streamlit.text_input('새로운 URL')
 if streamlit.button('캠페인 업데이트'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
