@@ -6,15 +6,11 @@ from urllib.error import URLError
 
 streamlit.title('피비스 캠페인 내역 관리')
 streamlit.text("캠페인 내역 확인하기:")
+
 def get_Campaign_list():
     with my_cnx.cursor() as my_cur:
-         my_cur.execute("select * from cj.public.Cam_History order by num desc")
-         return my_cur.fetchall()
-if streamlit.button('캠페인 List'):
-    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-    my_data_rows = get_Campaign_list()
-    my_cnx.close()
-    streamlit.dataframe(my_data_rows)
+        my_cur.execute("select * from cj.public.Cam_History order by num desc")
+        return my_cur.fetchall()
 
 
 def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9):
@@ -38,35 +34,39 @@ development = ['오픈률 집계', '기본코딩', '개인화 출력', '스크�
 add_8 = streamlit.selectbox('개발 선택', development)
 add_9 = streamlit.text_input('URL')
 
-
 if streamlit.button('업로드'):
-   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-   streamlit.write(insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9))
-   my_data_rows = get_Campaign_list()
-   my_cnx.close()
-   streamlit.dataframe(my_data_rows)
-
-
-
-streamlit.header("캠페인 URL 등록")
-def insert_row_table(add_9_1, add_3_1):
-    with my_cnx.cursor() as my_cur:
-        my_cur.execute("""
-            update cj.public.Cam_History 
-            (CAM_URL) where (CAM_NAME)
-            VALUES (%s, %s)
-        """, (add_9_1, add_3_1))
-    return "Thanks for adding the campaign."
-
-def campaign():
-    with my_cnx.cursor() as my_cur:
-         my_cur.execute("select cam_name from cj.public.Cam_History order by num desc")
-         return my_cur.fetchall()
-if streamlit.button('캠페인명'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-    my_data_rows = campaign()
+    streamlit.write(insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9))
+    my_data_rows = get_Campaign_list()
     my_cnx.close()
     streamlit.dataframe(my_data_rows)
-    
-add_3_1 = streamlit.selectbox('캠페인 선택', campaign())
-add_9_1 = streamlit.text_input('URL')
+
+
+
+
+
+
+
+def update_campaign_url(campaign_name, new_url):
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("""
+            UPDATE cj.public.Cam_History
+            SET CAM_URL = %s
+            WHERE CAM_NAME = %s
+        """, (new_url, campaign_name))
+    my_cnx.commit()
+    return f"Updated URL for {campaign_name} to {new_url}"
+if streamlit.button('캠페인 List'):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_data_rows = get_Campaign_list()
+    my_cnx.close()
+    streamlit.dataframe(my_data_rows)
+
+update_campaign_name = streamlit.text_input('캠페인명 (업데이트용)')
+new_url = streamlit.text_input('새로운 URL')
+if streamlit.button('캠페인 업데이트'):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    streamlit.write(update_campaign_url(update_campaign_name, new_url))
+    my_data_rows = get_Campaign_list()
+    my_cnx.close()
+    streamlit.dataframe(my_data_rows)
