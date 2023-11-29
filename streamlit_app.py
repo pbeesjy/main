@@ -60,11 +60,7 @@ def update_campaign_url(campaign_name, new_url):
         """, (new_url, campaign_name))
     my_cnx.commit()
     return f"Updated URL for {campaign_name} to {new_url}"
-if streamlit.button('캠페인 List'):
-    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-    my_data_rows = get_Campaign_list()
-    my_cnx.close()
-    streamlit.dataframe(my_data_rows)
+
 
 update_campaign_name = streamlit.text_input('캠페인명 (업데이트용)')
 new_url = streamlit.text_input('새로운 URL')
