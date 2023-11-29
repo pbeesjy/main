@@ -70,6 +70,7 @@ def update_campaign(new_url, new_cj_estimate, new_guide_estimate, new_profit, ne
     my_cnx.commit()
     return f"Updated URL for {new_campaign_name} to {new_url}, CJ_ESTIMATE to {new_cj_estimate}, GUIDE_ESTIMATE to {new_guide_estimate}, PROFIT to {new_profit}, PAGE to {new_page}, campaign_name to {new_campaign_name}"
 
+
 update_campaign_name_options = [row[0] for row in my_data_rows]
 update_campaign_name = streamlit.selectbox('캠페인 번호', update_campaign_name_options)
 new_campaign_name = streamlit.text_input('캠페인명')
