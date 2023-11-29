@@ -34,7 +34,7 @@ add_4 = streamlit.text_input('CJ 견적')
 add_5 = streamlit.text_input('안내 견적')
 add_6 = streamlit.text_input('수익')
 add_7 = streamlit.text_input('페이지수')
-development = ['오픈률 집계', '기본코딩', '개인화 출력', '스크레치 기능']
+development = ['오픈률 집계', '기본코딩', '개인화 출력', '스크레치', '설문']
 add_8 = streamlit.selectbox('개발 선택', development)
 add_9 = streamlit.text_input('URL')
 
@@ -45,3 +45,28 @@ if streamlit.button('업로드'):
    my_data_rows = get_Campaign_list()
    my_cnx.close()
    streamlit.dataframe(my_data_rows)
+
+
+
+streamlit.header("캠페인 URL 등록")
+def insert_row_table(add_9_1, add_3_1):
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("""
+            update cj.public.Cam_History 
+            (CAM_URL) where (CAM_NAME)
+            VALUES (%s, %s)
+        """, (add_9_1, add_3_1))
+    return "Thanks for adding the campaign."
+
+def campaign():
+    with my_cnx.cursor() as my_cur:
+         my_cur.execute("select cam_name from cj.public.Cam_History order by num desc")
+         return my_cur.fetchall()
+if streamlit.button('캠페인명'):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_data_rows = campaign()
+    my_cnx.close()
+    streamlit.dataframe(my_data_rows)
+    
+add_3_1 = streamlit.selectbox('캠페인 선택', campaign())
+add_9_1 = streamlit.text_input('URL')
