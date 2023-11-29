@@ -68,7 +68,7 @@ def update_campaign(new_url, new_cj_estimate, new_guide_estimate, new_profit, ne
             WHERE NUM = %s
         """, (new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, new_campaign_name))
     my_cnx.commit()
-    return f"Updated URL for {campaign_name} to {new_url}, CJ_ESTIMATE to {new_cj_estimate}, GUIDE_ESTIMATE to {new_guide_estimate}, PROFIT to {new_profit}, PAGE to {new_page}, CAM_NAME to {new_campaign_name}"
+    return f"Updated URL for {NUM} to {new_url}, CJ_ESTIMATE to {new_cj_estimate}, GUIDE_ESTIMATE to {new_guide_estimate}, PROFIT to {new_profit}, PAGE to {new_page}, CAM_NAME to {new_campaign_name}"
 
 
 
