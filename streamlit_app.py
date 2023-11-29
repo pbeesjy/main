@@ -65,11 +65,6 @@ def update_campaign_url(campaign_name, new_url):
     return f"Updated URL for {campaign_name} to {new_url}"
 
  
-def campaign_name():
-    with my_cnx.cursor() as my_cur:
-        my_cur.execute("select cam_name from cj.public.Cam_History order by num desc")
-        return my_cur.fetchall()
-update_campaign_name = streamlit.selectbox('캠페인 선택', campaign_name())
 
 streamlit.text_input('캠페인명 (업데이트용)')
 new_url = streamlit.text_input('새로운 URL')
