@@ -64,7 +64,7 @@ def update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estim
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
             UPDATE CJ.PUBLIC.CAM_HISTORY
-            SET CAM_URL = %s, CJ_ESTIMATE = %s, GUIDE_ESTIMATE = %s, PROFIT = %s, PAGE = %s, CAM_NAME = %s
+            SET CAM_URL = %s, CJ_ESTIMATE = %s, GUIDE_ESTIMATE = %s, PROFIT = %s, PAGE = %s, CAM_NAME = %s, Timestamp = TO_TIMESTAMP_NTZ(CONVERT_TIMEZONE('Asia/Seoul', CURRENT_TIMESTAMP()))
             WHERE CAM_NO = %s
         """, (new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, new_campaign_name, campaign_no))
     my_cnx.commit()
