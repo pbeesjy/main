@@ -33,7 +33,7 @@ def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add
     return "Thanks for adding the campaign."
 
 col1,col2,col3 = streamlit.columns([2,2])
-with col2 :
+with col1 :
     add_1 = streamlit.date_input('의뢰 날짜')
     company = ['록시땅', '서양네트웍스', '컬럼비아', '신영와코루']
     add_2 = streamlit.selectbox('회사 선택', company)
