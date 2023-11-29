@@ -40,6 +40,8 @@ development = ['오픈률 집계', '기본코딩', '개인화 출력', '스크�
 add_1 = streamlit.date_input('의뢰 날짜')
 add_2 = streamlit.selectbox('회사 선택', company)
 add_3 = streamlit.text_input('캠페인명')
+add_8 = streamlit.selectbox('개발 선택', development)
+add_9 = streamlit.text_input('URL')
 col1,col2 = streamlit.columns([2,2])
 with col1 :
     add_4 = streamlit.text_input('CJ 견적')
@@ -47,8 +49,7 @@ with col1 :
 with col2 :
     add_6 = streamlit.text_input('수익')
     add_7 = streamlit.text_input('페이지수')
-add_8 = streamlit.selectbox('개발 선택', development)
-add_9 = streamlit.text_input('URL')
+
 
 if streamlit.button('업로드'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
