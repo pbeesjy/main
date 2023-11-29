@@ -23,6 +23,12 @@ my_cnx.close()
 streamlit.dataframe(my_data_rows)
 
 def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9):
+    new_url = new_url if new_url else my_data_rows['CAM_URL']
+    new_cj_estimate = new_cj_estimate if new_cj_estimate else my_data_rows['CJ_ESTIMATE']
+    new_guide_estimate = new_guide_estimate if new_guide_estimate else my_data_rows['GUIDE_ESTIMATE']
+    new_profit = new_profit if new_profit else my_data_rows['PROFIT']
+    new_page = new_page if new_page else my_data_rows['PAGE']
+    new_campaign_name = new_campaign_name if new_campaign_name else my_data_rows['CAM_NAME']
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
             INSERT INTO cj.public.Cam_History 
