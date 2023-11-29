@@ -64,11 +64,12 @@ def update_campaign(new_url, new_cj_estimate, new_guide_estimate, new_profit, ne
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
             UPDATE cj.public.Cam_History
-            SET CAM_URL = %s, CJ_ESTIMATE = %s, GUIDE_ESTIMATE = %s, PROFIT = %s, PAGE = %s, campaign_name = %s
+            SET CAM_URL = %s, CJ_ESTIMATE = %s, GUIDE_ESTIMATE = %s, PROFIT = %s, PAGE = %s, CAMPAIGN_NAME = %s
             WHERE num = %s
         """, (new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, new_campaign_name, update_campaign_name))
     my_cnx.commit()
-    return f"Updated URL for {new_campaign_name} to {new_url}, CJ_ESTIMATE to {new_cj_estimate}, GUIDE_ESTIMATE to {new_guide_estimate}, PROFIT to {new_profit}, PAGE to {new_page}, campaign_name to {new_campaign_name}"
+    return f"Updated URL for {new_campaign_name} to {new_url}, CJ_ESTIMATE to {new_cj_estimate}, GUIDE_ESTIMATE to {new_guide_estimate}, PROFIT to {new_profit}, PAGE to {new_page}, CAMPAIGN_NAME to {new_campaign_name}"
+
 
 
 update_campaign_name_options = [row[0] for row in my_data_rows]
