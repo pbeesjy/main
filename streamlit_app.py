@@ -9,7 +9,7 @@ streamlit.text("캠페인 내역 확인하기:")
 
 def get_Campaign_list():
     with my_cnx.cursor() as my_cur:
-        my_cur.execute("SELECT CAM_NAME FROM cj.public.Cam_History ORDER BY CAM_NAME")
+        my_cur.execute("SELECT * FROM cj.public.Cam_History ORDER BY num desc")
         return [row[0] for row in my_cur.fetchall()]
 
 def update_campaign_url(campaign_name, new_url):
@@ -22,8 +22,7 @@ def update_campaign_url(campaign_name, new_url):
     my_cnx.commit()
     return f"Updated URL for {campaign_name} to {new_url}"
 
-# Move my_data_rows to the outermost scope
-my_data_rows = []
+my_data_rows = [my_cur.execute("SELECT CAM_NAME FROM cj.public.Cam_History ORDER BY CAM_NAME")]
 
 if streamlit.button('캠페인 List'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
