@@ -11,7 +11,11 @@ def get_Campaign_list():
     with my_cnx.cursor() as my_cur:
         my_cur.execute("select * from cj.public.Cam_History order by num desc")
         return my_cur.fetchall()
-
+if streamlit.button('캠페인 List'):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_data_rows = get_Campaign_list()
+    my_cnx.close()
+    streamlit.dataframe(my_data_rows)
 
 def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9):
     with my_cnx.cursor() as my_cur:
