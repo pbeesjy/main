@@ -63,7 +63,7 @@ def update_campaign_url(campaign_name, new_url):
 
 update_campaign_name_options = [row[2] for row in my_data_rows]
 update_campaign_name = streamlit.selectbox('캠페인명 (업데이트용)', update_campaign_name_options)
-new_url = streamlit.text_input('새로운 URL')
+new_url = streamlit.text_input('업데이트 URL')
 if streamlit.button('캠페인 업데이트'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     streamlit.write(update_campaign_url(update_campaign_name, new_url))
