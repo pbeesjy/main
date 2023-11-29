@@ -65,14 +65,15 @@ def update_campaign(campaign_name, new_url, new_cj_estimate, new_guide_estimate,
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
             UPDATE cj.public.Cam_History
-            SET CAM_URL = %s, CJ_ESTIMATE = %s, GUIDE_ESTIMATE = %s, PROFIT = %s, PAGE = %s
-            WHERE CAM_NAME = %s
-        """, (new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, campaign_name))
+            SET CAM_URL = %s, CJ_ESTIMATE = %s, GUIDE_ESTIMATE = %s, PROFIT = %s, PAGE = %s, campaign_name = %s
+            WHERE num = %s
+        """, (new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, new_campaign_name))
     my_cnx.commit()
-    return f"Updated URL for {campaign_name} to {new_url}, CJ_ESTIMATE to {new_cj_estimate}, GUIDE_ESTIMATE to {new_guide_estimate}, PROFIT to {new_profit}, PAGE to {new_page}"
+    return f"Updated URL for {CAM_URL} to {new_url}, CJ_ESTIMATE to {new_cj_estimate}, GUIDE_ESTIMATE to {new_guide_estimate}, PROFIT to {new_profit}, PAGE to {new_page}, {campaign_name} to {new_campaign_name}"
 
 update_campaign_name_options = [row[0] for row in my_data_rows]
 update_campaign_name = streamlit.selectbox('캠페인 번호', update_campaign_name_options)
+new_campaign_name = streamlit.text_input('캠페인명')
 new_url = streamlit.text_input('업데이트 URL')
 col3,col4 = streamlit.columns([2,2])
 with col3 :
