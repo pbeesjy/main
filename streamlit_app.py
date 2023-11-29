@@ -66,7 +66,7 @@ def update_campaign(new_url, new_cj_estimate, new_guide_estimate, new_profit, ne
             UPDATE CJ.PUBLIC.CAM_HISTORY
             SET CAM_URL = %s, CJ_ESTIMATE = %s, GUIDE_ESTIMATE = %s, PROFIT = %s, PAGE = %s, CAM_NAME = %s
             WHERE NUM = %s
-        """, (new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, new_campaign_name, update_campaign_name))
+        """, (new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, new_campaign_name))
     my_cnx.commit()
     return f"Updated URL for CAM_URL to {new_url}, CJ_ESTIMATE to {new_cj_estimate}, GUIDE_ESTIMATE to {new_guide_estimate}, PROFIT to {new_profit}, PAGE to {new_page}, CAM_NAME to {new_campaign_name}"
 
@@ -87,7 +87,7 @@ with col4 :
 
 if streamlit.button('캠페인 업데이트'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-    streamlit.write(update_campaign(update_campaign_name, new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page))
+    streamlit.write(update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page))
     my_data_rows = get_Campaign_list()
     my_cnx.close()
     streamlit.dataframe(my_data_rows)
