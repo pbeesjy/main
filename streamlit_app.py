@@ -12,7 +12,7 @@ my_data_rows = []
 
 def get_Campaign_list():
     with my_cnx.cursor() as my_cur:
-         my_cur.execute("select * from cj.public.Cam_History order by no desc")
+         my_cur.execute("select * from cj.public.Cam_History order by cam_no desc")
          my_data_rows  = my_cur.fetchall()
          return my_data_rows
 # streamlit.button('캠페인 List'):
