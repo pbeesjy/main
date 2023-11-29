@@ -64,7 +64,7 @@ def get_campaign_data_by_no(campaign_no):
     with my_cnx.cursor() as my_cur:
         my_cur.execute("SELECT * FROM CJ.PUBLIC.CAM_HISTORY WHERE CAM_NO = %s", (campaign_no,))
         data = my_cur.fetchone()
-        return {'CAM_URL': data[8], 'CJ_ESTIMATE': data[3], 'GUIDE_ESTIMATE': data[4], 'PROFIT': data[5], 'PAGE': data[6], 'CAM_NAME': data[2]}
+        return {'CAM_URL': data[9], 'CJ_ESTIMATE': data[4], 'GUIDE_ESTIMATE': data[5], 'PROFIT': data[6], 'PAGE': data[7], 'CAM_NAME': data[3]}
 
 def update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page):
 
