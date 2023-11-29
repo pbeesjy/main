@@ -7,10 +7,13 @@ from urllib.error import URLError
 streamlit.title('피비스 캠페인 내역 관리')
 streamlit.text("캠페인 내역 확인하기:")
 
+my_data_rows = []
+
 def get_Campaign_list():
     with my_cnx.cursor() as my_cur:
          my_cur.execute("select * from cj.public.Cam_History order by num desc")
-         return my_cur.fetchall()
+         my_data_rows  = my_cur.fetchall()
+         return my_data_rows
 if streamlit.button('캠페인 List'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     my_data_rows = get_Campaign_list()
@@ -59,7 +62,7 @@ def update_campaign_url(campaign_name, new_url):
     return f"Updated URL for {campaign_name} to {new_url}"
 
 
-update_campaign_name = streamlit.selectbox('캠페인명 (업데이트용)', [row[2] for row in my_data_rows])
+update_campaign_name = streamlit.selectbox('캠페인명 (업데이트용)', my_data_rows)
 new_url = streamlit.text_input('새로운 URL')
 if streamlit.button('캠페인 업데이트'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
