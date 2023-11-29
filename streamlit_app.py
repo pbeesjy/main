@@ -32,7 +32,7 @@ def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add
         """, (add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9))
     return "Thanks for adding the campaign."
 
-col1,col2,col3 = streamlit.columns([3,3])
+col1,col2,col3 = streamlit.columns([3,2])
 company = ['록시땅', '서양네트웍스', '컬럼비아', '신영와코루']
 development = ['오픈률 집계', '기본코딩', '개인화 출력', '스크레치', '설문']
 with col1 :
