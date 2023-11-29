@@ -4,6 +4,8 @@ import requests
 import snowflake.connector
 from urllib.error import URLError
 
+my_data_rows = get_Campaign_list()
+
 streamlit.title('피비스 캠페인 내역 관리')
 streamlit.text("캠페인 내역 확인하기:")
 
