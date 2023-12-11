@@ -20,6 +20,7 @@ def get_Campaign_list():
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_data_rows = get_Campaign_list()
 my_cnx.close()
+my_data_rows.head()
 streamlit.dataframe(my_data_rows)
 
 def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9):
