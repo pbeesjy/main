@@ -12,7 +12,7 @@ my_data_rows = []
 
 def get_Campaign_list():
     with my_cnx.cursor() as my_cur:
-         my_cur.execute("select * from cj.public.Cam_History order by cam_no desc")
+         my_cur.execute("select * from cj.public.CAM_MASTER order by cam_no desc")
          my_data_rows  = my_cur.fetchall()
          return my_data_rows
 # streamlit.button('캠페인 List'):
@@ -30,7 +30,7 @@ def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add
     add_9 = add_9 if add_9 else 'aaa'
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
-            INSERT INTO cj.public.Cam_History 
+            INSERT INTO cj.public.CAM_MASTER 
             (BASE_DATE, COMPANY, CAM_NAME, CJ_ESTIMATE, GUIDE_ESTIMATE, PROFIT, PAGE, DEVELOPMENT, CAM_URL)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
         """, (add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add_9))
@@ -67,7 +67,7 @@ streamlit.header('캠페인 수정')
 
 def get_campaign_data_by_no(campaign_no):
     with my_cnx.cursor() as my_cur:
-        my_cur.execute("SELECT * FROM CJ.PUBLIC.CAM_HISTORY WHERE CAM_NO = %s", (campaign_no,))
+        my_cur.execute("SELECT * FROM CJ.PUBLIC.CAM_MASTER WHERE CAM_NO = %s", (campaign_no,))
         data = my_cur.fetchone()
         return {'CAM_URL': data[9], 'CJ_ESTIMATE': data[4], 'GUIDE_ESTIMATE': data[5], 'PROFIT': data[6], 'PAGE': data[7], 'CAM_NAME': data[3]}
 
@@ -84,7 +84,7 @@ def update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estim
     
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
-            UPDATE CJ.PUBLIC.CAM_HISTORY
+            UPDATE CJ.PUBLIC.CAM_MASTER
             SET CAM_URL = %s, CJ_ESTIMATE = %s, GUIDE_ESTIMATE = %s, PROFIT = %s, PAGE = %s, CAM_NAME = %s, Timestamp = TO_TIMESTAMP_NTZ(CONVERT_TIMEZONE('Asia/Seoul', CURRENT_TIMESTAMP()))
             WHERE CAM_NO = %s
         """, (new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, new_campaign_name, campaign_no))
