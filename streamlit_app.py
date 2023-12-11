@@ -15,8 +15,6 @@ def get_Campaign_list():
          my_cur.execute("select * from cj.public.CAM_MASTER order by cam_no desc")
          my_data_rows  = my_cur.fetchall()
          return my_data_rows
-# streamlit.button('캠페인 List'):
-# streamlit.text("캠페인 List")
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_data_rows = get_Campaign_list()
 my_cnx.close()
