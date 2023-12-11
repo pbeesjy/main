@@ -12,7 +12,7 @@ my_data_rows = []
 
 def get_Campaign_list():
     with my_cnx.cursor() as my_cur:
-         my_cur.execute("select Cam_no, Base_Date, Cam_Code from cj.public.CAM_MASTER order by cam_no desc")
+         my_cur.execute("select * from cj.public.CAM_MASTER order by cam_no desc")
          my_data_rows  = my_cur.fetchall()
          return my_data_rows
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
