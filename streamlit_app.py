@@ -107,7 +107,7 @@ with col4 :
 
 if streamlit.button('캠페인 업데이트'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-    streamlit.write(update_campaign(new_campaign_name, new_url, new_cam_cdoe, new_cj_estimate, new_guide_estimate, new_profit, new_page))
+    streamlit.write(update_campaign(new_campaign_name, new_url, new_cam_code, new_cj_estimate, new_guide_estimate, new_profit, new_page))
     my_data_rows = get_Campaign_list()
     my_cnx.close()
     streamlit.dataframe(my_data_rows)
