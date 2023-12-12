@@ -70,11 +70,12 @@ def get_campaign_data_by_no(campaign_no):
         data = my_cur.fetchone()
         return {'CAM_URL': data[10], 'CJ_ESTIMATE': data[5], 'GUIDE_ESTIMATE': data[6], 'PROFIT': data[7], 'PAGE': data[8], 'CAM_NAME': data[4], 'CAM_CODE': data[2]}
 
-def update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page):
+def update_campaign(new_campaign_name, new_url, new_cam_code, new_cj_estimate, new_guide_estimate, new_profit, new_page):
 
     old_data = get_campaign_data_by_no(campaign_no)
 
     new_url = new_url if new_url else old_data['CAM_URL']
+    new_cam_code = new_cam_code if new_cam_code else old_data['CAM_CODE']
     new_cj_estimate = new_cj_estimate if new_cj_estimate else old_data['CJ_ESTIMATE']
     new_guide_estimate = new_guide_estimate if new_guide_estimate else old_data['GUIDE_ESTIMATE']
     new_profit = new_profit if new_profit else old_data['PROFIT']
