@@ -95,7 +95,7 @@ update_campaign_no_options = [row[0] for row in my_data_rows]
 campaign_no = streamlit.selectbox('캠페인 번호', update_campaign_no_options)
 new_campaign_name = streamlit.text_input('캠페인명')
 new_url = streamlit.text_input('업데이트 URL', key="update_url")
-new_cam_cdoe = streamlit.text_input('업데이트 캠페인 코드', key="update_cam_code")
+new_cam_cdoe = streamlit.text_input('캠페인 코드', key="update_cam_code")
 col3,col4 = streamlit.columns([2,2])
 with col3 :
     new_cj_estimate = streamlit.text_input('CJ 견적', key="update_cj_estimate")
