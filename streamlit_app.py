@@ -40,7 +40,7 @@ company = ['록시땅', '서양네트웍스', '컬럼비아', '신영와코루']
 development = ['오픈률 집계', '기본코딩', '개인화 출력', '스크레치', '설문']
 
 add_1 = streamlit.date_input('의뢰 날짜')
-add_10 = streamlit.date_input('캠페인 코드')
+add_10 = streamlit.text_input('캠페인 코드')
 add_2 = streamlit.selectbox('회사 선택', company)
 add_3 = streamlit.text_input('캠페인명', key="campaign_name")
 add_8 = streamlit.selectbox('개발 선택', development)
