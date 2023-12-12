@@ -84,9 +84,9 @@ def update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estim
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
             UPDATE CJ.PUBLIC.CAM_MASTER
-            SET  CAM_CODE = %s, CAM_URL = %s, CJ_ESTIMATE = %s, GUIDE_ESTIMATE = %s, PROFIT = %s, PAGE = %s, CAM_NAME = %s, Timestamp = TO_TIMESTAMP_NTZ(CONVERT_TIMEZONE('Asia/Seoul', CURRENT_TIMESTAMP()))
+            SET  CAM_URL = %s, CJ_ESTIMATE = %s, GUIDE_ESTIMATE = %s, PROFIT = %s, PAGE = %s, CAM_NAME = %s, CAM_CODE = %s, Timestamp = TO_TIMESTAMP_NTZ(CONVERT_TIMEZONE('Asia/Seoul', CURRENT_TIMESTAMP()))
             WHERE CAM_NO = %s
-        """, (new_cam_code, new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, new_campaign_name, campaign_no))
+        """, (new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, new_campaign_name, new_cam_code, campaign_no))
     my_cnx.commit()
     return f"{campaign_no}의 정보가 {new_cam_code}, {new_url}, {new_cj_estimate}, {new_guide_estimate}, {new_profit}, {new_page}, {new_campaign_name}로 수정 되었습니다."
 
@@ -95,7 +95,7 @@ update_campaign_no_options = [row[0] for row in my_data_rows]
 campaign_no = streamlit.selectbox('캠페인 번호', update_campaign_no_options)
 new_campaign_name = streamlit.text_input('캠페인명')
 new_url = streamlit.text_input('업데이트 URL', key="update_url")
-new_cam_cdoe = streamlit.text_input('캠페인 코드', key="update_cam_code")
+new_cam_code = streamlit.text_input('캠페인 코드', key="update_cam_code")
 col3,col4 = streamlit.columns([2,2])
 with col3 :
     new_cj_estimate = streamlit.text_input('CJ 견적', key="update_cj_estimate")
