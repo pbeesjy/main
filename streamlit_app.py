@@ -36,8 +36,8 @@ def insert_row_table(add_1, add_2, add_3, add_4, add_5, add_6, add_7, add_8, add
 
 
 
-company = ['록시땅', '서양네트웍스', '컬럼비아', '신영와코루']
-development = ['오픈률 집계', '기본코딩', '개인화 출력', '스크레치', '설문']
+company = ['서양네트웍스', '컬럼비아', '신영와코루', '록시땅', '디아지오']
+development = ['기본코딩', '오픈률 집계', '개인화 출력', '스크레치', '설문']
 
 add_1 = streamlit.date_input('의뢰 날짜')
 add_10 = streamlit.text_input('캠페인 코드', key="campaign_code")
