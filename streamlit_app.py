@@ -40,7 +40,7 @@ company = ['록시땅', '서양네트웍스', '컬럼비아', '신영와코루']
 development = ['오픈률 집계', '기본코딩', '개인화 출력', '스크레치', '설문']
 
 add_1 = streamlit.date_input('의뢰 날짜')
-add_10 = streamlit.text_input('캠페인 코드')
+add_10 = streamlit.text_input('캠페인 코드', key="campaign_code")
 add_2 = streamlit.selectbox('회사 선택', company)
 add_3 = streamlit.text_input('캠페인명', key="campaign_name")
 add_8 = streamlit.selectbox('개발 선택', development)
@@ -68,7 +68,7 @@ def get_campaign_data_by_no(campaign_no):
     with my_cnx.cursor() as my_cur:
         my_cur.execute("SELECT * FROM CJ.PUBLIC.CAM_MASTER WHERE CAM_NO = %s", (campaign_no,))
         data = my_cur.fetchone()
-        return {'CAM_URL': data[9], 'CJ_ESTIMATE': data[4], 'GUIDE_ESTIMATE': data[5], 'PROFIT': data[6], 'PAGE': data[7], 'CAM_NAME': data[3]}
+        return {'CAM_URL': data[10], 'CJ_ESTIMATE': data[5], 'GUIDE_ESTIMATE': data[6], 'PROFIT': data[7], 'PAGE': data[8], 'CAM_NAME': data[4], 'CAM_CODE': data[2}
 
 def update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page):
 
@@ -84,17 +84,18 @@ def update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estim
     with my_cnx.cursor() as my_cur:
         my_cur.execute("""
             UPDATE CJ.PUBLIC.CAM_MASTER
-            SET CAM_URL = %s, CJ_ESTIMATE = %s, GUIDE_ESTIMATE = %s, PROFIT = %s, PAGE = %s, CAM_NAME = %s, Timestamp = TO_TIMESTAMP_NTZ(CONVERT_TIMEZONE('Asia/Seoul', CURRENT_TIMESTAMP()))
+            SET  CAM_CODE = %s, CAM_URL = %s, CJ_ESTIMATE = %s, GUIDE_ESTIMATE = %s, PROFIT = %s, PAGE = %s, CAM_NAME = %s, Timestamp = TO_TIMESTAMP_NTZ(CONVERT_TIMEZONE('Asia/Seoul', CURRENT_TIMESTAMP()))
             WHERE CAM_NO = %s
-        """, (new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, new_campaign_name, campaign_no))
+        """, (new_cam_code, new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page, new_campaign_name, campaign_no))
     my_cnx.commit()
-    return f"{campaign_no}의 정보가 {new_url}, {new_cj_estimate}, {new_guide_estimate}, {new_profit}, {new_page}, {new_campaign_name}로 수정 되었습니다."
+    return f"{campaign_no}의 정보가 {new_cam_code}, {new_url}, {new_cj_estimate}, {new_guide_estimate}, {new_profit}, {new_page}, {new_campaign_name}로 수정 되었습니다."
 
 
 update_campaign_no_options = [row[0] for row in my_data_rows]
 campaign_no = streamlit.selectbox('캠페인 번호', update_campaign_no_options)
 new_campaign_name = streamlit.text_input('캠페인명')
 new_url = streamlit.text_input('업데이트 URL', key="update_url")
+new_cam_cdoe = streamlit.text_input('업데이트 캠페인 코드', key="update_cam_code")
 col3,col4 = streamlit.columns([2,2])
 with col3 :
     new_cj_estimate = streamlit.text_input('CJ 견적', key="update_cj_estimate")
@@ -105,7 +106,7 @@ with col4 :
 
 if streamlit.button('캠페인 업데이트'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-    streamlit.write(update_campaign(new_campaign_name, new_url, new_cj_estimate, new_guide_estimate, new_profit, new_page))
+    streamlit.write(update_campaign(new_campaign_name, new_url, new_cam_cdoe, new_cj_estimate, new_guide_estimate, new_profit, new_page))
     my_data_rows = get_Campaign_list()
     my_cnx.close()
     streamlit.dataframe(my_data_rows)
